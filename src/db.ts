@@ -1,12 +1,14 @@
 import mongoose,{Schema,model} from "mongoose";
+mongoose.connect("mongodb+srv://admin:aOum012s2CzoYkV8@cluster0.voq2a.mongodb.net/pg-maintinance")
 
 
 
 
 const userschema=new Schema({
-    username:{type:String,unique:true},
+    username:String,
     password:String
 })
 
 
-const usermodel=model("user",userschema)
+export const usermodel=model("user",userschema);
+
