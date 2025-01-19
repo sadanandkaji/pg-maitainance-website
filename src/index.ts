@@ -50,13 +50,13 @@ app.post("/api/v1/addPg",usermiddleware, async (req,res)=>{
      const pgname=req.body.pgname
      const ownerpassword=req.body.ownerpassword
 
-     const hashedownerpassword=await bcrypt.hash(ownerpassword,5);
+     const hashedownerpassword= await bcrypt.hash(ownerpassword,5)
 
      await pgmodel.create({
           pgname:pgname,
           pgpassword:hashedownerpassword
      })
-
+         
      res.json({
           message:"added pgs"
      })
