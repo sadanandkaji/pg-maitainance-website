@@ -6,6 +6,7 @@ import { JWT_SECRET } from "./config";
 export function usermiddleware(req:Request,res:Response,next:NextFunction){
     
  const token=req.headers["authorization"];
+ //@ts-ignore
  const  decodedpassword=Jwt.verify(token as string ,JWT_SECRET)
 
    if(decodedpassword){
