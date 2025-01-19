@@ -77,6 +77,4 @@ app.post("/api/v1/addcustomer",usermiddleware,async (req,res)=>{
 
 
 
-
-
 app.listen(3000);
