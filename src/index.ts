@@ -1,10 +1,11 @@
 import express from 'express';
-import {usermodel} from "./db"
 import Jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 
+import {pgmodel, usermodel,addcustomermodel} from "./db"
+import { JWT_SECRET } from './config';
+import { usermiddleware } from './middleware';
 
-const JWT_SECRET="sadanan1234"
 const app=express();
 app.use(express.json())
 
@@ -27,7 +28,7 @@ app.post("/api/v1/signup", async (req,res)=>{
 
 app.post("/api/v1/signin", async (req,res)=>{
      const username=req.body.username;
-     const password=req.body.username;
+     const password=req.body.password;
     
      const founduser  = await usermodel.findOne({
           username:username
@@ -44,9 +45,37 @@ app.post("/api/v1/signin", async (req,res)=>{
           usertoken:usertoken
           })
      }
-     
-
 })
+app.post("/api/v1/addPg",usermiddleware, async (req,res)=>{
+     const pgname=req.body.pgname
+     const ownerpassword=req.body.ownerpassword
+
+     const hashedownerpassword=await bcrypt.hash(ownerpassword,5);
+
+     await pgmodel.create({
+          pgname:pgname,
+          pgpassword:hashedownerpassword
+     })
+
+     res.json({
+          message:"added pgs"
+     })
+})
+app.post("/api/v1/addcustomer",usermiddleware,async (req,res)=>{
+     
+     const customername=req.body.customername
+     const identitycard=req.body.identitycard
+
+     await addcustomermodel.create({
+         customername:customername,
+         identitycard:identitycard
+     })
+     res.json({
+          message:"added customer"
+     })
+})
+
+
 
 
 

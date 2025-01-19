@@ -9,6 +9,20 @@ const userschema=new Schema({
     password:String
 })
 
+const pgschema=new Schema({
+    pgname:String,
+    pgpassword:String
+})
+
+const customerschema=new Schema({
+    customername:String,
+    identitycard:String
+    
+})
+
+
 
 export const usermodel=model("user",userschema);
+export const pgmodel=model("pgs" ,pgschema);
+export const addcustomermodel=model("customer" ,customerschema);
 
