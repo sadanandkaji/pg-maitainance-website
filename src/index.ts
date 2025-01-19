@@ -40,6 +40,7 @@ app.post("/api/v1/signin", async (req,res)=>{
          const usertoken= Jwt.sign({
           //@ts-ignore
          id:founduser._id.toString()
+         // @ts-ignore
      },JWT_SECRET)
      res.json({
           usertoken:usertoken

@@ -1,5 +1,7 @@
 import mongoose,{Schema,model} from "mongoose";
-mongoose.connect("mongodb+srv://admin:aOum012s2CzoYkV8@cluster0.voq2a.mongodb.net/pg-maintinance")
+require("dotenv").config()
+// @ts-ignore
+mongoose.connect(process.env.MONGO_URL)
 
 
 

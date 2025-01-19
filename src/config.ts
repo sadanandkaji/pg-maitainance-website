@@ -1,1 +1,1 @@
- export const JWT_SECRET="sadanan1234"
+ export const JWT_SECRET=process.env.JWT_SECRET
