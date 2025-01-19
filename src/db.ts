@@ -1,5 +1,6 @@
 import mongoose,{Schema,model} from "mongoose";
-require("dotenv").config()
+import dotenv  from "dotenv"
+dotenv.config()
 // @ts-ignore
 mongoose.connect(process.env.MONGO_URL)
 
@@ -13,7 +14,10 @@ const userschema=new Schema({
 
 const pgschema=new Schema({
     pgname:String,
-    pgpassword:String
+    pgpassword:String,
+    userid:{type:mongoose.Types.ObjectId,ref:"user"},
+    pgid:{type:mongoose.Types.ObjectId,ref:"pgs"}
+
 })
 
 const customerschema=new Schema({

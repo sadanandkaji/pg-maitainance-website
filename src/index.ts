@@ -47,6 +47,8 @@ app.post("/api/v1/signin", async (req,res)=>{
           })
      }
 })
+
+
 app.post("/api/v1/addPg",usermiddleware, async (req,res)=>{
      const pgname=req.body.pgname
      const ownerpassword=req.body.ownerpassword
@@ -55,11 +57,41 @@ app.post("/api/v1/addPg",usermiddleware, async (req,res)=>{
 
      await pgmodel.create({
           pgname:pgname,
-          pgpassword:hashedownerpassword
+          pgpassword:hashedownerpassword,
+          //@ts-ignore
+          userid:req.userid
      })
          
      res.json({
           message:"added pgs"
+     })
+})
+
+
+app.get("/api/v1/addPg",usermiddleware, async (req,res)=>{
+     //@ts-ignore
+     const userid=req.userid
+     
+     const pgs= await pgmodel.findOne({
+          userid
+     })
+         console.log(pgs)
+     res.json({
+          //@ts-ignore
+         pgs
+     })
+})
+app.delete("/api/v1/addPg",usermiddleware, async (req,res)=>{
+     const pgid=req.body.pgid
+     await pgmodel.deleteOne({
+         _id:pgid,
+         //@ts-ignore
+         userid:req.userid
+
+     })
+         
+     res.json({
+         message:"delted"
      })
 })
 app.post("/api/v1/addcustomer",usermiddleware,async (req,res)=>{
